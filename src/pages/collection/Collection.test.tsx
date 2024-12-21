@@ -1,8 +1,14 @@
 import Collection from './Collection';
 import { render } from 'vitest-browser-react';
 import '@testing-library/jest-dom/vitest';
+import { Item } from '../../models/Item';
+import { generateItem } from '../../utils/testutils/objectGenerators';
 
 describe('Collection', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it(`should render a side panel and a main content area`, () => {
     const { getByRole } = render(<Collection />);
 
@@ -13,11 +19,27 @@ describe('Collection', () => {
     expect(mainContent.element()).toBeInTheDocument();
   });
 
-  it.skip('should not show the view toggle button when there are no items in the collection', () => {
+  it.skip(`should retrieve the collection items of the user`, () => {
+    const expectedItems: Item[] = Array(5).map((_, idx) => {
+      return generateItem({ id: idx.toString() });
+    });
+
+    const collectionMock = vi.fn().mockResolvedValueOnce(expectedItems);
+    vi.mock('../../services/collection', () => ({
+      getCollection: collectionMock,
+    }));
+
+    const { getByRole } = render(<Collection />);
+    const items = getByRole('list');
+    console.log({ elements: items.elements() });
+    expect(items.elements()).toBeInTheDocument();
+  });
+
+  it('should not show the view toggle button when there are no items in the collection', () => {
     const { getByRole } = render(<Collection />);
     const viewToggleBtn = getByRole('button', { name: /view/i });
 
-    expect(viewToggleBtn).not.toBeInTheDocument();
+    expect(viewToggleBtn.element()).not.toBeInTheDocument();
   });
 
   it.skip('should allow the user to toggle the view between list and grid', () => {});

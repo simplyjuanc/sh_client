@@ -1,3 +1,5 @@
+import { Item } from '../../models/Item';
+import Toggle from '../../ui/toggle';
 import { MainContent } from './MainContent';
 import { SidePanel } from './SidePanel';
 
@@ -9,11 +11,23 @@ const Collection: React.FC = () => {
   // (TanStack) useSearchParams hook
 
   // const items =
+  const items: Item[] = [
+    {
+      id: 'default-id',
+      condition: 'MINT',
+      ownerId: 'some-owner-id',
+      notes: '',
+      price: { amount: 25.0, currency: 'GBP' },
+      releaseId: 'default-release-id',
+      format: 'VINYL',
+    },
+  ];
 
   return (
     <div className='container'>
       <SidePanel />
       <MainContent />
+      {items.length > 0 && <Toggle children={<SidePanel />} />}
     </div>
   );
 };
