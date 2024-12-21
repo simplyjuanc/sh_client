@@ -1,10 +1,10 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
-import Dashboard from '../pages/collection/Dashboard';
+import CollectionComponent from '../pages/collection/Collection';
 
 export const Route = createLazyFileRoute('/collection')({
   component: Collection,
 });
 
 function Collection() {
-  return <Dashboard />;
+  return <CollectionComponent />;
 }

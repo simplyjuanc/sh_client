@@ -1,10 +1,10 @@
-import Dashboard from './Dashboard';
+import Collection from './Collection';
 import { render } from 'vitest-browser-react';
 import '@testing-library/jest-dom/vitest';
 
-describe('Dashboard', () => {
+describe('Collection', () => {
   it(`should render a side panel and a main content area`, () => {
-    const { getByRole } = render(<Dashboard />);
+    const { getByRole } = render(<Collection />);
 
     const sidePanel = getByRole('complementary');
     const mainContent = getByRole('heading', { name: /item/i });
@@ -13,9 +13,14 @@ describe('Dashboard', () => {
     expect(mainContent.element()).toBeInTheDocument();
   });
 
-  it.skip('should allow the user to toggle the view between list and grid', () => {});
+  it.skip('should not show the view toggle button when there are no items in the collection', () => {
+    const { getByRole } = render(<Collection />);
+    const viewToggleBtn = getByRole('button', { name: /view/i });
 
-  it.skip('should not show the view toggle button when there are no items in the collection', () => {});
+    expect(viewToggleBtn).not.toBeInTheDocument();
+  });
+
+  it.skip('should allow the user to toggle the view between list and grid', () => {});
 
   it.skip('should allow the user to filter the collection data', () => {});
 

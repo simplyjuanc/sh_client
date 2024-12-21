@@ -1,12 +1,17 @@
 import './App.css';
-import Dashboard from './pages/collection/Dashboard';
+import Collection from './pages/collection/Collection';
 import Header from './components/Header';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const client = new QueryClient();
 
 function App() {
   return (
     <>
-      <Header />
-      <Dashboard />
+      <QueryClientProvider client={client}>
+        <Header />
+        <Collection />
+      </QueryClientProvider>
     </>
   );
 }
