@@ -1,20 +1,11 @@
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <Header />
       <div className='container'>
         <SidePanel />
         <MainContent />
       </div>
     </div>
-  );
-};
-
-const Header: React.FC = () => {
-  return (
-    <header>
-      <h1>My Collection</h1>
-    </header>
   );
 };
 
