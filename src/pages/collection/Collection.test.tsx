@@ -20,9 +20,11 @@ describe('Collection', () => {
   });
 
   it.skip(`should retrieve the collection items of the user`, () => {
-    const expectedItems: Item[] = Array(5).map((_, idx) => {
-      return generateItem({ id: idx.toString() });
-    });
+    const expectedItems: Item[] = Array(5)
+      .fill(null)
+      .map((_, idx) => {
+        return generateItem({ id: idx.toString() });
+      });
 
     const collectionMock = vi.fn().mockResolvedValueOnce(expectedItems);
     vi.mock('../../services/collection', () => ({
@@ -36,10 +38,12 @@ describe('Collection', () => {
   });
 
   it('should not show the view toggle button when there are no items in the collection', () => {
-    const { getByRole } = render(<Collection />);
-    const viewToggleBtn = getByRole('button', { name: /view/i });
+    const { getByText } = render(<Collection />);
+    const viewToggleBtn = getByText(/change view/i);
 
-    expect(viewToggleBtn.element()).not.toBeInTheDocument();
+    if (viewToggleBtn) console.log({ viewToggleBtn });
+
+    expect(viewToggleBtn.query()).toBeNull();
   });
 
   it.skip('should allow the user to toggle the view between list and grid', () => {});

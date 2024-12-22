@@ -1,7 +1,8 @@
-import { Item } from '../../models/Item';
+import { useQuery } from '@tanstack/react-query';
 import Toggle from '../../ui/toggle';
 import { MainContent } from './MainContent';
 import { SidePanel } from './SidePanel';
+import { getPersonalCollection } from '../../server/clients/collection';
 
 const Collection: React.FC = () => {
   // Filtering functionality should live here
@@ -9,19 +10,23 @@ const Collection: React.FC = () => {
   // We also need to fetch the data
   // Meaning we need to add some URL stateme management
   // (TanStack) useSearchParams hook
+  const userId = '5';
 
-  // const items =
-  const items: Item[] = [
-    {
-      id: 'default-id',
-      condition: 'MINT',
-      ownerId: 'some-owner-id',
-      notes: '',
-      price: { amount: 25.0, currency: 'GBP' },
-      releaseId: 'default-release-id',
-      format: 'VINYL',
-    },
-  ];
+  const {
+    data: items,
+    error,
+    isPending,
+  } = useQuery({
+    queryKey: ['collection', userId],
+    queryFn: () => getPersonalCollection(userId),
+  });
+
+  if (error) {
+    return <div>Something went wrong</div>;
+  }
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className='container'>
@@ -29,7 +34,7 @@ const Collection: React.FC = () => {
       <MainContent />
       {items.length > 0 && (
         <Toggle
-          children={<SidePanel />}
+          children={<div>Change view</div>}
           onPressedChange={() => {
             // TODO: Implement the toggle functionality
           }}
