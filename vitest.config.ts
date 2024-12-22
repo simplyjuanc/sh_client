@@ -5,6 +5,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    css: true,
     browser: {
       provider: 'playwright', // or 'webdriverio'
       enabled: true,
