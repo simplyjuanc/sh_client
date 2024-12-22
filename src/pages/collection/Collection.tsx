@@ -27,7 +27,14 @@ const Collection: React.FC = () => {
     <div className='container'>
       <SidePanel />
       <MainContent />
-      {items.length > 0 && <Toggle children={<SidePanel />} />}
+      {items.length > 0 && (
+        <Toggle
+          children={<SidePanel />}
+          onPressedChange={() => {
+            // TODO: Implement the toggle functionality
+          }}
+        />
+      )}
     </div>
   );
 };
