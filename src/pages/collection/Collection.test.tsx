@@ -1,54 +1,50 @@
 import Collection from './Collection';
-import { render } from 'vitest-browser-react';
+import { MainContent } from './MainContent';
+import { wrapper } from '../../shared/utils/tanstackQueryUtils';
 import '@testing-library/jest-dom/vitest';
-import { Item } from '../../models/Item';
-import { generateItem } from '../../utils/testutils/objectGenerators';
+import { cleanup, render, screen } from '@testing-library/react';
+import { useGetUserCollection } from '../../shared/hooks/useGetUserCollection';
+import { generateItem } from '../../shared/testutils/objectGenerators';
+
+vi.mock('../../shared/hooks/useGetUserCollection');
 
 describe('Collection', () => {
   afterEach(() => {
+    cleanup();
     vi.restoreAllMocks();
   });
 
-  it(`should render a side panel and a main content area`, () => {
-    const { getByRole } = render(<Collection />);
+  test(`should render a side panel and a main content area`, () => {
+    vi.mocked(useGetUserCollection, { partial: true }).mockReturnValue({
+      data: [],
+      isSuccess: true,
+      isPending: false,
+      error: null,
+    });
+    render(wrapper({ children: <Collection /> }));
 
-    const sidePanel = getByRole('complementary');
-    const mainContent = getByRole('heading', { name: /item/i });
+    const sidePanel = screen.queryByRole('complementary');
+    const mainContent = screen.queryByText(/items/i);
+    console.log({ sidePanel, mainContent });
 
-    expect(sidePanel.element()).toBeInTheDocument();
-    expect(mainContent.element()).toBeInTheDocument();
+    expect(sidePanel).toBeVisible();
+    expect(mainContent).toBeVisible();
   });
 
-  it.skip(`should retrieve the collection items of the user`, () => {
-    const expectedItems: Item[] = Array(5)
-      .fill(null)
-      .map((_, idx) => {
-        return generateItem({ id: idx.toString() });
-      });
+  test('should not show the view toggle button when there are no items in the collection', async () => {
+    vi.mocked(useGetUserCollection, { partial: true }).mockReturnValue({
+      data: [],
+      isSuccess: true,
+      isPending: false,
+      error: null,
+    });
 
-    const collectionMock = vi.fn().mockResolvedValueOnce(expectedItems);
-    vi.mock('../../services/collection', () => ({
-      getCollection: collectionMock,
-    }));
+    render(wrapper({ children: <Collection /> }));
 
-    const { getByRole } = render(<Collection />);
-    const items = getByRole('list');
-    console.log({ elements: items.elements() });
-    expect(items.elements()).toBeInTheDocument();
+    const viewToggleBtn = screen.queryByText(/change view/i);
+    expect(viewToggleBtn).toBeNull();
   });
 
-  it('should not show the view toggle button when there are no items in the collection', () => {
-    const { getByText } = render(<Collection />);
-    const viewToggleBtn = getByText(/change view/i);
-
-    if (viewToggleBtn) console.log({ viewToggleBtn });
-
-    expect(viewToggleBtn.query()).toBeNull();
-  });
-
-  it.skip('should allow the user to toggle the view between list and grid', () => {});
-
-  it.skip('should allow the user to filter the collection data', () => {});
 
   it.skip('should keep state accurately with the URL query params', () => {});
 });

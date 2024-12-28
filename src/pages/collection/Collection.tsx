@@ -1,33 +1,20 @@
-import { useQuery } from '@tanstack/react-query';
-import Toggle from '../../ui/toggle';
+import Toggle from '../../shared/ui/toggle';
 import { MainContent } from './MainContent';
 import { SidePanel } from './SidePanel';
-import { getPersonalCollection } from '../../server/clients/collection';
+import { useGetUserCollection } from '../../shared/hooks/useGetUserCollection';
 
 const Collection: React.FC = () => {
+  const userId = '1234';
+
+  const { isPending, error, data: items } = useGetUserCollection(userId);
+  if (isPending) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   // Filtering functionality should live here
   // That with the search bar at the side panel
   // We also need to fetch the data
   // Meaning we need to add some URL stateme management
   // (TanStack) useSearchParams hook
-  const userId = '5';
-
-  const {
-    data: items,
-    error,
-    isPending,
-  } = useQuery({
-    queryKey: ['collection', userId],
-    queryFn: () => getPersonalCollection(userId),
-  });
-
-  if (error) {
-    return <div>Something went wrong</div>;
-  }
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className='container'>
       <SidePanel />
