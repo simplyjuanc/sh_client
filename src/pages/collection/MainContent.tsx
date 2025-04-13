@@ -1,4 +1,11 @@
-export const MainContent: React.FC = () => {
+export type MainContentProps = {
+  view: 'grid' | 'list';
+};
+
+export const MainContent: React.FC<MainContentProps> = (
+  props: MainContentProps
+) => {
+  console.log('MainContent', { props });
   return (
     <>
       <h2>Items</h2>

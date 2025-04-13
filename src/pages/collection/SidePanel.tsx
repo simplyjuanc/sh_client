@@ -1,7 +1,7 @@
 export const SidePanel: React.FC = () => {
   return (
     <aside>
-      <button>Add Item</button>
+      <h2>Filters</h2>
     </aside>
   );
 };

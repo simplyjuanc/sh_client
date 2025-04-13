@@ -4,8 +4,8 @@ import { Item } from "../../models/Item";
 
 
 export const getPersonalCollection = async (userId: string): Promise<Item[]> => {
-  console.log('getPersonalCollection called with userId:', userId);
-  return new Promise((resolve) => resolve([
+  console.log({ 'getPersonalCollection called with userId': userId });
+  return await new Promise((resolve) => resolve([
     {
       id: 'default-id',
       condition: 'MINT',

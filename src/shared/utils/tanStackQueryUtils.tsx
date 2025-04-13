@@ -25,13 +25,6 @@ export function setupWrapper() {
   return wrapper;
 }
 
-//export const wrapper =
-//   (Component: React.FC) =>
-//   ({ children }: { children: React.ReactNode }) => (
-//     <QueryClientProvider client={queryClient}>
-//       <Component>{children}</Component>
-//     </QueryClientProvider>
-// );
 export function setupRenderHook(hook: QueryFunction) {
   return renderHook(hook, { wrapper });
 }
