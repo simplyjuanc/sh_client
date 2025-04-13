@@ -1,9 +1,9 @@
-export type MainContentProps = {
+export type CollectionProps = {
   view: 'grid' | 'list';
 };
 
-export const MainContent: React.FC<MainContentProps> = (
-  props: MainContentProps
+export const Collection: React.FC<CollectionProps> = (
+  props: CollectionProps
 ) => {
   console.log('MainContent', { props });
   return (

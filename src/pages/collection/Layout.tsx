@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', width: '100vw' }}>
       <SidePanel />
       <div>
         <Header />

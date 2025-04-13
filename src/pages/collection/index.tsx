@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from './Layout';
-import { MainContent } from './MainContent';
+import { Collection } from './Collection';
 import { useGetUserCollection } from '../../shared/hooks/useGetUserCollection';
 
 const CollectionPage: React.FC = () => {
@@ -12,7 +12,7 @@ const CollectionPage: React.FC = () => {
   console.log({ items });
   return (
     <Layout>
-      <MainContent view={'grid'} />
+      <Collection view={'grid'} />
     </Layout>
   );
 };
