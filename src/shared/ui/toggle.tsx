@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as Toggle from '@radix-ui/react-toggle';
-import './toggle.style.css';
+// import './toggle.style.css';
 
 type ToggleableProps = {
   defaultPressed?: boolean;
