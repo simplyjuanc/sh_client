@@ -1,6 +1,8 @@
+import '../styles/globals.css';
 import * as React from 'react';
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import NavMenu from '../shared/ui/navigation-menu';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -9,14 +11,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
-      <div className='p-2 flex gap-2'>
-        <Link to='/' className='[&.active]:font-bold'>
-          Home
-        </Link>{' '}
-        <Link to='/collection' className='[&.active]:font-bold'>
-          Collection
-        </Link>
-      </div>
+      <NavMenu items={[]} />
       <hr />
       <Outlet />
       <TanStackRouterDevtools />
