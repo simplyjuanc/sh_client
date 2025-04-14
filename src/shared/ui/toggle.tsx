@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import * as Toggle from '@radix-ui/react-toggle';
-import './toggle.style.css';
+// import './toggle.style.css';
 
 type ToggleableProps = {
   defaultPressed?: boolean;
-  onPressedChange: () => void;
+  onPress: () => void;
   children: React.ReactNode;
 };
 
 const Toggleable: React.FC<ToggleableProps> = ({
-  onPressedChange,
+  onPress,
   defaultPressed,
   children,
 }) => {
   const [isPressed, setIsPressed] = useState(defaultPressed ?? false);
-  const handlePressedChange = () => {
-    onPressedChange();
-    setIsPressed((prev) => !prev);
+  const handlePressedChange = (pressed: boolean) => {
+    setIsPressed(pressed);
+    if (pressed) {
+      onPress();
+    }
   };
 
   return (
@@ -24,7 +26,7 @@ const Toggleable: React.FC<ToggleableProps> = ({
       className='Toggle'
       aria-label='Toggle italic'
       pressed={isPressed}
-      onPressedChange={handlePressedChange}
+      onPressedChange={(pressed) => handlePressedChange(pressed)}
       defaultPressed={defaultPressed ?? false}
     >
       {children}

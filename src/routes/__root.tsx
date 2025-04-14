@@ -1,6 +1,9 @@
+import '../styles/globals.css';
 import * as React from 'react';
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import NavMenu from '../components/navigation-menu';
+import { Separator } from 'radix-ui';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -9,15 +12,8 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
-      <div className='p-2 flex gap-2'>
-        <Link to='/' className='[&.active]:font-bold'>
-          Home
-        </Link>{' '}
-        <Link to='/collection' className='[&.active]:font-bold'>
-          Collection
-        </Link>
-      </div>
-      <hr />
+      <NavMenu />
+      <Separator.Root style={{ border: 'solid 2px white' }} />
       <Outlet />
       <TanStackRouterDevtools />
     </React.Fragment>
