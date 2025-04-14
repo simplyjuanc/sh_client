@@ -1,7 +1,7 @@
 export const SidePanel: React.FC = () => {
   return (
-    <aside>
+    <div style={{ padding: '1rem' }}>
       <h2>Filters</h2>
-    </aside>
+    </div>
   );
 };

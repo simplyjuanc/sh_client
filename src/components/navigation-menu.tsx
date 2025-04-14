@@ -20,7 +20,9 @@ const NavMenu: React.FC = () => {
     <NavigationMenu.Root>
       <NavigationMenu.List>
         {routes.map((it) => (
-          <NavLink href={it.href}>{it.text}</NavLink>
+          <NavLink key={it.href} href={it.href}>
+            {it.text}
+          </NavLink>
         ))}
       </NavigationMenu.List>
     </NavigationMenu.Root>
