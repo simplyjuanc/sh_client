@@ -7,7 +7,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div style={{ display: 'flex', width: '100vw' }}>
       <SidePanel />
-      <div>
+      <div style={{ width: '100%' }}>
         <Header />
         <main>{children}</main>
         <Footer />

@@ -2,7 +2,8 @@ import '../styles/globals.css';
 import * as React from 'react';
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
-import NavMenu from '../shared/ui/navigation-menu';
+import NavMenu from '../components/navigation-menu';
+import { Separator } from 'radix-ui';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -11,8 +12,8 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
-      <NavMenu items={[]} />
-      <hr />
+      <NavMenu />
+      <Separator.Root style={{ border: 'solid 2px white' }} />
       <Outlet />
       <TanStackRouterDevtools />
     </React.Fragment>
