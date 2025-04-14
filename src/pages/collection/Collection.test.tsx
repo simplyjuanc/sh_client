@@ -21,7 +21,7 @@ describe('Collection', () => {
       isPending: false,
       error: null,
     });
-    render(wrapper({ children: <Collection /> }));
+    render(wrapper({ children: <Collection view={'grid'} /> }));
 
     const sidePanel = screen.queryByRole('complementary');
     const mainContent = screen.queryByText(/items/i);
@@ -38,7 +38,7 @@ describe('Collection', () => {
       error: null,
     });
 
-    render(wrapper({ children: <Collection /> }));
+    render(wrapper({ children: <Collection view={'grid'} /> }));
 
     const viewToggleBtn = screen.queryByText(/change view/i);
     expect(viewToggleBtn).toBeNull();
@@ -57,7 +57,7 @@ describe('Collection', () => {
       error: null,
     });
 
-    render(wrapper({ children: <Collection /> }));
+    render(wrapper({ children: <Collection view={'grid'} /> }));
 
     const viewToggleBtn = screen.getByText(/change view/i);
 

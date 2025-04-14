@@ -2,9 +2,7 @@ export type CollectionProps = {
   view: 'grid' | 'list';
 };
 
-export const Collection: React.FC<CollectionProps> = (
-  props: CollectionProps
-) => {
+const Collection: React.FC<CollectionProps> = (props: CollectionProps) => {
   console.log('MainContent', { props });
   return (
     <>
@@ -15,3 +13,5 @@ export const Collection: React.FC<CollectionProps> = (
     </>
   );
 };
+
+export default Collection;

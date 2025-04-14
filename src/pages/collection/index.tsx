@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from './Layout';
-import { Collection } from './Collection';
+import Collection from './Collection';
 import { useGetUserCollection } from '../../shared/hooks/useGetUserCollection';
 
 const CollectionPage: React.FC = () => {
